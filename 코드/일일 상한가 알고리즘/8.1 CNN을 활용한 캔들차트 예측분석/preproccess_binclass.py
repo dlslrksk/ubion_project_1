@@ -12,7 +12,7 @@ from pathlib import Path
 
 # https://github.com/matplotlib/mpl_finance
 # from mpl_finance import candlestick2_ochl, volume_overlay
-from mplfinance import candlestick2_ochl, volume_overlay
+from mpl_finance import candlestick2_ochl, volume_overlay
 
 
 def isnan(value):
@@ -70,7 +70,7 @@ def image2dataset(input, label_file):
     for filename in os.listdir(path):
         # print(filename)
         # print(os.getcwd())
-        if filename is not '':
+        if filename != '':
             for k, v in label_dict.items():
                 splitname = filename.split("_")
                 f, e = os.path.splitext(filename)
@@ -90,7 +90,7 @@ def image2dataset(input, label_file):
             os.makedirs("{}/classes/{}".format(path, folder))
 
     for filename in os.listdir(path):
-        if filename is not '' and filename is not 'classes':
+        if filename != '' and filename != 'classes':
             # print(filename[:1])
             ### 여기에 for k,v in label_dict.items() 돌면서
             f, e = os.path.splitext(filename)
@@ -168,7 +168,7 @@ def ohlc2cs(fname, seq_len, dataset_type, dimension, use_volume):
         # ohlc+volume
         c = df.ix[i:i + int(seq_len) - 1, :]
         if len(c) == int(seq_len):
-            my_dpi = 96
+            my_dpi = 300
             fig = plt.figure(figsize=(dimension / my_dpi,
                                       dimension / my_dpi), dpi=my_dpi)
             ax1 = fig.add_subplot(1, 1, 1)
